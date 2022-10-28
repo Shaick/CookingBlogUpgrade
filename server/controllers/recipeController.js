@@ -155,3 +155,25 @@ exports.submitRecipeOnPost = async(req, res) => {
       res.redirect('/submit-recipe');
     }
   }
+
+/*  // Delete Recipe
+ async function deleteRecipe(){
+   try {
+     await Recipe.deleteOne({ name: 'New Recipe Updated' });
+   } catch (error) {
+     console.log(error);
+   }
+ }
+ deleteRecipe(); */
+
+/*   async function updateRecipe() {
+    try{
+        const res = await Recipe.updateOne( {name: 'Cozumel'} , { name: 'New Recipe Updated'});
+        res.n;  //number of documents matched
+        res.nModified; // Number of documents modified
+    } catch(error) {
+        console.log(error);
+    }
+  }
+
+  updateRecipe(); */
