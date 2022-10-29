@@ -4,6 +4,7 @@ const fileUpload = require('express-fileupload');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
+const { v4: uuidv4 } = require('uuid');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -16,7 +17,7 @@ app.use(expressLayouts);
 
 app.use(cookieParser('CookingBlogSecure'));
 app.use(session({
-    secret: 'CookingBlogSecretSession',
+    secret: uuidv4(),
     saveUninitialized: true,
     resave: true
   }));

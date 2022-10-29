@@ -1,0 +1,9 @@
+
+<h1 class="pb-4">Usuario logado</h1>
+
+<div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+  <% if(user != '') { %>
+    <h2>Nome: <%= user.nick %> <br>Email: <%= user.email %></h2>
+
+  <% } %>      
+</div>

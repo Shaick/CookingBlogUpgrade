@@ -1,6 +1,7 @@
 require('../models/database');
 const Category = require('../models/Category');
 const Recipe = require('../models/Recipe');
+const User = require('../models/User');
 
 //Get homepage
 exports.homepage = async(req, res) => {
@@ -177,3 +178,84 @@ exports.submitRecipeOnPost = async(req, res) => {
   }
 
   updateRecipe(); */
+
+  // Get login
+  exports.loginGet = async(req, res) => {
+        res.render('login');
+  }  
+
+ 
+  exports.signupGet = async(req, res) => { 
+        res.render('signup');
+  }
+
+  //Post /SignUp
+exports.signupPost = async(req, res) => {
+  const {email, nick,password} = req.body;
+  try {
+     // const username = await User.find(user => user.name = req.body.name);
+      //const useremail  = await User.find(user => user.email = req.body.email);
+      const existUser = await User.findOne({ email, nick, function(err, user){
+        if (err) {console.log(err); return res.satus(500).send({message: err.message});}
+      } });
+      if(existUser) return res.json({message: "Usuario ja existe"});
+      
+      const newUser = new User({
+        nick: nick,
+        email: email,
+        password: password,
+        photo: ""
+      });
+
+      console.log(newUser),
+      await newUser.save();
+      return res.redirect("/login");
+      
+        //res.end("SignUp Successful...!");
+    } catch (error) {
+       // next(err);
+      res.json({message: error.message || "Error Occured" });
+    }
+}
+
+  //Post /Login
+exports.loginPost = async(req, res) => {
+    try {
+      const {email, password} = req.body;
+      User.findOne({email: email, password: password}, function(err, user){
+        if (err) {console.log(err); return res.satus(500).send({message: err.message});}
+        if(!user) { 
+          //req.flash('infoSubmit', 'User not find.')
+          res.json({message: "user not find"});
+          return ;
+        }
+        req.session.user = user;
+        console.log(req.session.user);
+        return res.render('dashboard', {user : user});
+      })
+    } catch (error) {
+        res.satus(500).send({message: error.message || "Error Occured" });
+    }
+}
+
+// route for dashboard
+exports.dashboard = async(req, res) => {
+    if(req.session.user){
+        res.render('dashboard', {user : req.session.user});
+    }else{
+        res.send("Unauthorize User")
+    }
+}
+
+// Get logout
+exports.logout = async(req, res) => {
+    req.session.destroy(function(err){
+        if(err){
+            console.log(err);
+            res.send("Error")
+        }else{
+            const food = { latest, thai, american, chinese, Spanish };
+            res.render('index', { title: 'Cookinkg Blog - Home', categories, food } );
+        }
+    })
+}

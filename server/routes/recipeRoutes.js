@@ -13,5 +13,12 @@ router.get('/explore-latest', recipeController.exploreLatest);
 router.get('/explore-random', recipeController.exploreRandom);
 router.get('/submit-recipe', recipeController.submitRecipe);
 router.post('/submit-recipe', recipeController.submitRecipeOnPost);
+router.get('/login', recipeController.loginGet);
+router.post('/login', recipeController.loginPost);
+router.get('/logout', recipeController.logout);
+router.get('/dashboard', recipeController.dashboard);
+router.get('/signup', recipeController.signupGet);
+router.post('/signup', recipeController.signupPost);
+
 
 module.exports = router;
