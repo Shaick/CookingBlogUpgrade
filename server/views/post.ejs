@@ -1,0 +1,42 @@
+<% if(post != null ) { %>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page"><%- post.title %></li>
+      </ol>
+    </nav>
+  
+  
+    <div class="row">
+  
+      <div class="col-12 col-md-4">
+        <img src="/uploads/<%- post.image %>" class="img-fluid sticky-top" style="top: 20px;" alt="<%- post.title %>" loading="lazy">
+      </div>
+  
+      <div class="col-12 col-md-8">
+        <div class="row">
+          <div class="col-12"><h1><%- post.title %></h1></div>
+          <div class="col-12 mb-4"><i class="bi bi-tag"></i> <%- post.category %></div>
+          <div class="col-12" style="white-space: pre-line;">
+            <!-- <h4>A sua carta diz:</h4> -->
+            <h1><%- post.subtitle %> </h1>
+            <%- post.description %>
+          </div>
+        </div>
+  
+        <div class="row pt-4">
+          <div class="col-12">
+            <h4>Insight's</h4>
+            <ul class="list-group list-group-flush">
+              <% post.keywords.forEach(function(keywords, index){ %>
+                <li class="list-group-item"><%= keywords %></li>
+              <% }) %>
+            </ul> 
+          </div>
+        </div>
+      </div>
+    </div>
+  <% } else { %>
+    <p>Postagem não Encontrada.</p>
+  <% } %>

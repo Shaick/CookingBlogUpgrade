@@ -1,0 +1,118 @@
+<div class="px-4 py-5 my-5 text-center">
+    <h1 class="display-5 fw-bold">Editar / Atualizar Postagem</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead">Share your amazing recipies with thousands of web developers accross the world. Fill our form to get started.</p>
+    </div>
+  </div>
+  
+  <div class="row justify-content-center">
+  
+    <% if(infoSubmitObj != '') { %>
+      <div class="col-8 alert alert-success" role="alert">
+        <%= infoSubmitObj %>
+      </div>
+    <% } %>
+  
+    <% if(infoErrorsObj != '') { %>
+      <div class="col-8 alert alert-danger" role="alert">
+        <%= infoErrorsObj[0].message %>
+      </div>
+    <% } %>
+  
+    <div class="col-8">
+
+      <form action="/submit-post" enctype="multipart/form-data" method="POST">
+      
+        <div class="row g-3">
+          <h5>Foto Atual:</h5>
+          <img src="/uploads/<%- post.image %>" alt="<%- post.name %>" loading="lazy">
+
+          <div class="col-12">
+            <label for="id" class="form-label">Id:</label>
+            <input type="text" name="id" id="id" value="<%- post.id %> " class="form-control" readonly>
+          </div>
+
+          <div class="col-12">
+            <label for="old_name" class="form-label">Titulo Atual:</label>
+            <input type="text" name="old_name" id="old_name" value="<%- post.name %> " class="form-control" readonly>
+          </div>
+
+          <div class="col-12">
+            <label for="name" class="form-label">Novo titulo da postagem:</label>
+            <input type="text" name="name" id="name" class="form-control" required>
+          </div>
+
+          <div class="col-12">
+            <label for="oldsub" class="form-label">Sub Titulo Atual:</label>
+            <input type="text" name="oldsub" id="oldsub" value="<%- post.email %> " class="form-control" readonly>
+          </div>
+  
+          <div class="col-12">
+            <label for="email" class="form-label">Novo sub titulo da postagem:</label>
+            <input type="text" name="email" id="email" class="form-control" required>
+          </div>
+
+          <div class="col-12">
+            <label for="description" class="form-label">Atual Descrição:</label>
+            <textarea name="old_description" id="old_description" class="form-control" cols="30" rows="8" readonly><%- post.description %></textarea>
+          </div>
+          
+          <div class="col-12">
+            <label for="description" class="form-label">Nova Descrição:</label>
+            <textarea name="description" id="description" class="form-control" cols="30" rows="8"></textarea>
+          </div>
+
+          <div class="row pt-4">
+            <div class="col-12">
+              <label class="form-label">Atual Hashtegs:</label><br>
+              <ul class="list-group list-group-flush">
+                <% post.ingredients.forEach(function(ingredients, index){ %>
+                  <li class="list-group-item"><%= ingredients %></li>
+                <% }) %>
+              </ul> 
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <label for="name" class="form-label">Novas Hashtegs:</label><br>
+            <small>Example: Flamengo</small>
+            <div class="ingredientList">
+              <div class="ingredeintDiv mb-1">
+                <input type="text" name="ingredients" class="form-control">
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-12">
+            <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+ HashTags</button>
+          </div>
+  
+          <div class="col-12">
+            <br>
+            <label class="form-label">Categoria Atual --> <%- post.category %> </label><br>
+            <label for="category">Nova Categoria</label>
+            <select class="form-select form-control" name="category" aria-label="Category">
+              <% if(categories != '') { %>
+                <option selected>Selecione uma Categoria</option>
+                <% categories.forEach(function(category, index) { %>
+                   <option value="<%= category.name  %>"><%= category.name  %> </option> 
+                      <% }) %>
+                      <% } %> 
+            </select>
+          </div>
+  
+          <div class="col-12">
+            <label for="image">Nova imagem:</label>
+            <input type="file" class="form-control" name="image" accept="image/*">
+          </div>
+  
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+          </div>
+  
+        </div>
+      
+      </form>
+  
+    </div>
+  </div>

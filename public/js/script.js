@@ -1,6 +1,6 @@
-let addIngredientsBtn = document.getElementById('addIngredientsBtn');
-let ingredientList = document.querySelector('.ingredientList');
-let ingredeintDiv = document.querySelectorAll('.ingredeintDiv')[0];
+let addIngredientsBtn = document.getElementById('addKeywordsBtn');
+let ingredientList = document.querySelector('.keywordsList');
+let ingredeintDiv = document.querySelectorAll('.keywordsDiv')[0];
 
 addIngredientsBtn.addEventListener('click', function(){
   let newIngredients = ingredeintDiv.cloneNode(true);

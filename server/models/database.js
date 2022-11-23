@@ -9,5 +9,5 @@ db.once('open', function() {
 // Models
 
 require('./Category');
-require('./Recipe');
+require('./Post');
 require('./User');
